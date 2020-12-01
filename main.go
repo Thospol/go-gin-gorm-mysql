@@ -22,7 +22,7 @@ import (
 // @version 1.0
 // @description Learning API Description
 
-// @host localhost:8080
+// @host go-mysql-api-xapa2c3k2q-as.a.run.app
 // @BasePath /api
 func main() {
 	//=======================================================
