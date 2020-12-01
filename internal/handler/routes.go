@@ -35,13 +35,13 @@ func (r Routes) Init(config *config.Configs, result *config.ReturnResult) http.H
 			Pattern:     "healthcheck",
 			Endpoint:    healthcheckEndpoint.HealthCheck,
 		},
-		// {
-		// 	Name:        "Swagger UI",
-		// 	Description: "swagger ui",
-		// 	Method:      http.MethodGet,
-		// 	Pattern:     "swagger/*any",
-		// 	Endpoint:    ginSwagger.WrapHandler(swaggerFiles.Handler, ginSwagger.URL("http://localhost:8080/swagger/doc.json")),
-		// },
+		{
+			Name:        "Swagger UI",
+			Description: "swagger ui",
+			Method:      http.MethodGet,
+			Pattern:     "swagger/*any",
+			Endpoint:    ginSwagger.WrapHandler(swaggerFiles.Handler, ginSwagger.URL("doc.json")),
+		},
 	}
 
 	route := gin.New()
@@ -50,8 +50,6 @@ func (r Routes) Init(config *config.Configs, result *config.ReturnResult) http.H
 	for _, e := range r.v1 {
 		g1.Handle(e.Method, e.Pattern, e.Endpoint)
 	}
-
-	route.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler, ginSwagger.URL("doc.json")))
 
 	return route
 }
