@@ -1,0 +1,15 @@
+database:
+  mysql:
+    host: "localhost"
+    port: "3306"
+    username: ""
+    password: ""
+    database_name: ""
+    driver_name: ""
+    protocol: "tcp"
+    timeout: "5s"
+
+http_server:
+  read_timeout: 10s
+  write_timeout: 10s
+  read_header_timeout: 10s
