@@ -6,6 +6,7 @@ import (
 	"strings"
 
 	"github.com/fsnotify/fsnotify"
+	"github.com/gin-gonic/gin"
 	con "github.com/gorilla/context"
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/viper"
@@ -29,8 +30,8 @@ type SwaggerInfoResult struct {
 }
 
 // WithLocale with locale
-func (rs Result) WithLocale(r *http.Request) Result {
-	lacale, ok := con.Get(r, "lang").(string)
+func (rs Result) WithLocale(c *gin.Context) Result {
+	lacale, ok := Get(c, LangKey).(string)
 	if !ok {
 		rs.Description.Locale = "th"
 	}

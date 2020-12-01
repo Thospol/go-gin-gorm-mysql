@@ -7,6 +7,8 @@ import (
 	"go-gin-gorm-mysql/internal/pkg/healthcheck"
 
 	"github.com/gin-gonic/gin"
+	ginSwagger "github.com/swaggo/gin-swagger"   // gin-swagger middleware
+	"github.com/swaggo/gin-swagger/swaggerFiles" // swagger embed files
 )
 
 type route struct {
@@ -33,6 +35,13 @@ func (r Routes) Init(config *config.Configs, result *config.ReturnResult) http.H
 			Pattern:     "healthcheck",
 			Endpoint:    healthcheckEndpoint.HealthCheck,
 		},
+		// {
+		// 	Name:        "Swagger UI",
+		// 	Description: "swagger ui",
+		// 	Method:      http.MethodGet,
+		// 	Pattern:     "swagger/*any",
+		// 	Endpoint:    ginSwagger.WrapHandler(swaggerFiles.Handler, ginSwagger.URL("http://localhost:8080/swagger/doc.json")),
+		// },
 	}
 
 	route := gin.New()
@@ -42,10 +51,7 @@ func (r Routes) Init(config *config.Configs, result *config.ReturnResult) http.H
 		g1.Handle(e.Method, e.Pattern, e.Endpoint)
 	}
 
-	return route
-}
+	route.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler, ginSwagger.URL("doc.json")))
 
-// Healthcheck health check service
-func Healthcheck(c *gin.Context) {
-	c.JSON(config.RR.Internal.Success.HTTPStatusCode(), config.RR.Internal.Success)
+	return route
 }

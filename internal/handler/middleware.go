@@ -54,6 +54,8 @@ func Request() gin.HandlerFunc {
 			}
 		}
 
+		acceptLanguage(c)
+
 		// // intercept writing response and store it to write log.
 		buff := bytes.Buffer{}
 		bw := bufferWriter{c.Writer, &buff}
@@ -205,4 +207,13 @@ func JSONDuplicate(d *json.Decoder, path []string) error {
 		return errors.New(duplicate)
 	}
 	return nil
+}
+
+func acceptLanguage(c *gin.Context) {
+	lang := c.Request.Header.Get("Accept-Language")
+	if lang == "" || lang != "th" {
+		lang = "en"
+	}
+	config.Set(c, config.LangKey, lang)
+	c.Next()
 }

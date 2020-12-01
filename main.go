@@ -13,9 +13,17 @@ import (
 	"os/signal"
 	"time"
 
+	_ "go-gin-gorm-mysql/docs"
+
 	"github.com/sirupsen/logrus"
 )
 
+// @title Learning API
+// @version 1.0
+// @description Learning API Description
+
+// @host localhost:8000
+// @BasePath /api
 func main() {
 	//=======================================================
 	// Read enironment for server config

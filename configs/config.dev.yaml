@@ -2,10 +2,10 @@ database:
   mysql:
     host: "localhost"
     port: "3306"
-    username: ""
-    password: ""
-    database_name: ""
-    driver_name: ""
+    username: "root"
+    password: "password"
+    database_name: "local"
+    driver_name: "mysql"
     protocol: "tcp"
     timeout: "5s"
 

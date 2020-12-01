@@ -1,0 +1,44 @@
+basePath: /api
+definitions:
+  config.SwaggerInfoResult:
+    properties:
+      code:
+        type: integer
+      message:
+        type: string
+    type: object
+host: localhost:8000
+info:
+  contact: {}
+  description: Learning API Description
+  license: {}
+  title: Learning API
+  version: "1.0"
+paths:
+  /v1/healthcheck:
+    get:
+      consumes:
+      - application/json
+      description: HealthCheck Service API
+      parameters:
+      - description: (en, th)
+        in: header
+        name: Accept-Language
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/config.SwaggerInfoResult'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/config.SwaggerInfoResult'
+      security:
+      - ApiKeyAuth: []
+      summary: HealthCheck
+      tags:
+      - Health
+swagger: "2.0"
