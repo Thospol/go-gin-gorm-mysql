@@ -7,7 +7,7 @@
         "license": {},
         "version": "1.0"
     },
-    "host": "localhost:8000",
+    "host": "d-xapa2c3k2q-as.a.run.app",
     "basePath": "/api",
     "paths": {
         "/v1/healthcheck": {

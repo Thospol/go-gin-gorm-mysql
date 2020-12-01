@@ -25,6 +25,6 @@ COPY --from=builder /api/docs /docs
 
 ADD configs /configs
 
-EXPOSE 8000
+EXPOSE 8080
 
-CMD ["./api","-environment", "dev"]
+CMD ["./api","-environment", "prod"]

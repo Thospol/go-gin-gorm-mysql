@@ -22,14 +22,14 @@ import (
 // @version 1.0
 // @description Learning API Description
 
-// @host localhost:8000
+// @host go-mysql-api-xapa2c3k2q-as.a.run.app
 // @BasePath /api
 func main() {
 	//=======================================================
 	// Read enironment for server config
 	environment := flag.String("environment", "dev", "set working environment")
 	configs := flag.String("config", "configs", "set configs path, default as: 'configs'")
-	port := flag.String("port", "8000", "set port for start service")
+	port := flag.String("port", "8080", "set port for start service")
 
 	flag.Parse()
 
