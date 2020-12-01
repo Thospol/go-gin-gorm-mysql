@@ -52,6 +52,13 @@ func (r Routes) Init(config *config.Configs, result *config.ReturnResult) http.H
 			Pattern:     "products",
 			Endpoint:    productEndpoint.Create,
 		},
+		{
+			Name:        "Get all products",
+			Description: "get all product description",
+			Method:      http.MethodGet,
+			Pattern:     "products",
+			Endpoint:    productEndpoint.GetAll,
+		},
 	}
 
 	route := gin.New()

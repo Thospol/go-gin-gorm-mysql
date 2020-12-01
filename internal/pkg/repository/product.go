@@ -10,6 +10,7 @@ import (
 type Product interface {
 	Create(database *gorm.DB, i interface{}) error
 	FindByName(database *gorm.DB, name string) ([]*models.Product, error)
+	FindAll(database *gorm.DB) ([]*models.Product, error)
 }
 
 type product struct {
@@ -27,6 +28,16 @@ func NewProductRepository() Product {
 func (repo *product) FindByName(database *gorm.DB, name string) ([]*models.Product, error) {
 	entities := []*models.Product{}
 	if err := database.Where("name = ?", name).Find(&entities).Error; err != nil {
+		return nil, err
+	}
+
+	return entities, nil
+}
+
+// FindAll find all product
+func (repo *product) FindAll(database *gorm.DB) ([]*models.Product, error) {
+	entities := []*models.Product{}
+	if err := database.Find(&entities).Error; err != nil {
 		return nil, err
 	}
 

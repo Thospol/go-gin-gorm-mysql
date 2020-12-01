@@ -11,6 +11,7 @@ import (
 // Service service product interface
 type Service interface {
 	Create(database *gorm.DB, request createRequest) (*models.Product, error)
+	GetAll(database *gorm.DB) ([]*models.Product, error)
 }
 
 type service struct {
@@ -42,4 +43,14 @@ func (s *service) Create(database *gorm.DB, request createRequest) (*models.Prod
 	}
 
 	return product, nil
+}
+
+// GetAll get all product service
+func (s *service) GetAll(database *gorm.DB) ([]*models.Product, error) {
+	entities, err := s.productRepository.FindAll(database)
+	if err != nil {
+		return nil, err
+	}
+
+	return entities, nil
 }

@@ -33,7 +33,6 @@ func NewEndpoint(config *config.Configs, result *config.ReturnResult) Endpoint {
 // @Param Accept-Language header string false "(en, th)"
 // @Success 200 {object} config.SwaggerInfoResult
 // @Failure 400 {object} config.SwaggerInfoResult
-// @Security ApiKeyAuth
 // @Router /v1/healthcheck [get]
 func (ep *endpoint) HealthCheck(c *gin.Context) {
 	c.JSON(config.RR.Internal.Success.HTTPStatusCode(), ep.result.Internal.Success.WithLocale(c))

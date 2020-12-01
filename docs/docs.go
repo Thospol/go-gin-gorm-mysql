@@ -27,11 +27,6 @@ var doc = `{
     "paths": {
         "/v1/healthcheck": {
             "get": {
-                "security": [
-                    {
-                        "ApiKeyAuth": []
-                    }
-                ],
                 "description": "HealthCheck Service API",
                 "consumes": [
                     "application/json"
@@ -68,6 +63,44 @@ var doc = `{
             }
         },
         "/v1/products": {
+            "get": {
+                "description": "Get Products Service API",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Product"
+                ],
+                "summary": "Get Products",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "(en, th)",
+                        "name": "Accept-Language",
+                        "in": "header"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/models.Product"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/config.SwaggerInfoResult"
+                        }
+                    }
+                }
+            },
             "post": {
                 "security": [
                     {

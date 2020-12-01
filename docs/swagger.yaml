@@ -64,12 +64,35 @@ paths:
           description: Bad Request
           schema:
             $ref: '#/definitions/config.SwaggerInfoResult'
-      security:
-      - ApiKeyAuth: []
       summary: HealthCheck
       tags:
       - Health
   /v1/products:
+    get:
+      consumes:
+      - application/json
+      description: Get Products Service API
+      parameters:
+      - description: (en, th)
+        in: header
+        name: Accept-Language
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Product'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/config.SwaggerInfoResult'
+      summary: Get Products
+      tags:
+      - Product
     post:
       consumes:
       - application/json

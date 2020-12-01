@@ -11,6 +11,7 @@ import (
 // Endpoint endpoint product interface
 type Endpoint interface {
 	Create(c *gin.Context)
+	GetAll(c *gin.Context)
 }
 
 type endpoint struct {
@@ -52,6 +53,30 @@ func (ep *endpoint) Create(c *gin.Context) {
 	}()
 
 	response, err := ep.service.Create(database.Database, request)
+	if err != nil {
+		errMsg := config.RR.Internal.ConnectionError
+		if locErr, ok := err.(config.Result); ok {
+			errMsg = locErr
+		}
+		c.AbortWithStatusJSON(errMsg.HTTPStatusCode(), errMsg)
+		return
+	}
+
+	c.JSON(ep.result.Internal.Success.HTTPStatusCode(), response)
+}
+
+// GetAll godoc
+// @Tags Product
+// @Summary Get Products
+// @Description Get Products Service API
+// @Accept json
+// @Produce json
+// @Param Accept-Language header string false "(en, th)"
+// @Success 200 {array} models.Product
+// @Failure 400 {object} config.SwaggerInfoResult
+// @Router /v1/products [get]
+func (ep *endpoint) GetAll(c *gin.Context) {
+	response, err := ep.service.GetAll(database.Database)
 	if err != nil {
 		errMsg := config.RR.Internal.ConnectionError
 		if locErr, ok := err.(config.Result); ok {
