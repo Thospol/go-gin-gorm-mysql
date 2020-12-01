@@ -35,7 +35,7 @@ definitions:
       price:
         type: integer
     type: object
-host: d-xapa2c3k2q-as.a.run.app
+host: localhost:8080
 info:
   contact: {}
   description: Learning API Description
