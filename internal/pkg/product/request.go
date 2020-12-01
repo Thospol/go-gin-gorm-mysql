@@ -1,8 +1,8 @@
 package product
 
 type createRequest struct {
-	Name        string `json:"name"`
+	Name        string `json:"name" validate:"required"`
 	Description string `json:"description,omitempty"`
-	Price       int    `json:"price"`
-	Amount      int    `json:"amount"`
+	Price       int    `json:"price" validate:"required"`
+	Amount      int    `json:"amount" validate:"required"`
 }

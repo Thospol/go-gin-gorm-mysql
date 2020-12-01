@@ -51,6 +51,14 @@ func (ep *endpoint) Create(c *gin.Context) {
 		c.Request.Body.Close()
 	}()
 
+	if err := config.CF.Validator.Struct(request); err != nil {
+		c.AbortWithStatusJSON(
+			ep.result.Internal.BadRequest.HTTPStatusCode(),
+			config.RR.CustomMessage(err.Error(), err.Error()).WithLocale(c),
+		)
+		return
+	}
+
 	response, err := ep.service.Create(database.Get(), request)
 	if err != nil {
 		errMsg := config.RR.Internal.ConnectionError

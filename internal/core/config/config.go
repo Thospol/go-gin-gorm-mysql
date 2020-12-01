@@ -5,6 +5,7 @@ import (
 	"time"
 
 	"github.com/fsnotify/fsnotify"
+	"github.com/go-playground/validator/v10"
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/viper"
 )
@@ -26,6 +27,7 @@ const (
 
 // Configs models
 type Configs struct {
+	Validator  *validator.Validate
 	HTTPServer struct {
 		ReadTimeout       time.Duration `mapstructure:"read_timeout"`
 		WriteTimeout      time.Duration `mapstructure:"write_timeout"`
@@ -80,6 +82,8 @@ func bindingConfig(vp *viper.Viper, cf *Configs) error {
 		logrus.Error("unmarshal config error:", err)
 		return err
 	}
+
+	cf.Validator = validator.New()
 
 	return nil
 }
