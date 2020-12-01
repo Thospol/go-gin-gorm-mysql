@@ -5,6 +5,7 @@ import (
 
 	"go-gin-gorm-mysql/internal/core/config"
 	"go-gin-gorm-mysql/internal/pkg/healthcheck"
+	"go-gin-gorm-mysql/internal/pkg/product"
 
 	"github.com/gin-gonic/gin"
 	ginSwagger "github.com/swaggo/gin-swagger"   // gin-swagger middleware
@@ -27,6 +28,8 @@ type Routes struct {
 // Init adds API routes to route object
 func (r Routes) Init(config *config.Configs, result *config.ReturnResult) http.Handler {
 	healthcheckEndpoint := healthcheck.NewEndpoint(config, result)
+	productEndpoint := product.NewEndpoint(config, result)
+
 	r.v1 = []route{
 		{
 			Name:        "Healthcheck",
@@ -41,6 +44,13 @@ func (r Routes) Init(config *config.Configs, result *config.ReturnResult) http.H
 			Method:      http.MethodGet,
 			Pattern:     "swagger/*any",
 			Endpoint:    ginSwagger.WrapHandler(swaggerFiles.Handler, ginSwagger.URL("doc.json")),
+		},
+		{
+			Name:        "Create product",
+			Description: "create product description",
+			Method:      http.MethodPost,
+			Pattern:     "products",
+			Endpoint:    productEndpoint.Create,
 		},
 	}
 

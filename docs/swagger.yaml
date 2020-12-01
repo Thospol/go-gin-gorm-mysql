@@ -7,6 +7,34 @@ definitions:
       message:
         type: string
     type: object
+  models.Product:
+    properties:
+      amount:
+        type: integer
+      createdAt:
+        type: string
+      description:
+        type: string
+      id:
+        type: integer
+      name:
+        type: string
+      price:
+        type: integer
+      updatedAt:
+        type: string
+    type: object
+  product.createRequest:
+    properties:
+      amount:
+        type: integer
+      description:
+        type: string
+      name:
+        type: string
+      price:
+        type: integer
+    type: object
 host: localhost:8000
 info:
   contact: {}
@@ -41,4 +69,36 @@ paths:
       summary: HealthCheck
       tags:
       - Health
+  /v1/products:
+    post:
+      consumes:
+      - application/json
+      description: Create Product Service API
+      parameters:
+      - description: (en, th)
+        in: header
+        name: Accept-Language
+        type: string
+      - description: request body
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/product.createRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Product'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/config.SwaggerInfoResult'
+      security:
+      - ApiKeyAuth: []
+      summary: Create Product
+      tags:
+      - Product
 swagger: "2.0"

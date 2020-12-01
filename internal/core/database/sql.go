@@ -4,6 +4,7 @@ import (
 	"fmt"
 
 	"go-gin-gorm-mysql/internal/core/config"
+	"go-gin-gorm-mysql/internal/pkg/models"
 
 	"github.com/sirupsen/logrus"
 	"gorm.io/driver/mysql"
@@ -14,11 +15,6 @@ var (
 	// Database global variable database
 	Database = &gorm.DB{}
 )
-
-// MySQLConfig config mysql
-type MySQLConfig struct {
-	Database *gorm.DB
-}
 
 // InitConnection open initialize a new db connection.
 func InitConnection(cf *config.Configs) error {
@@ -48,6 +44,14 @@ func InitConnection(cf *config.Configs) error {
 		logrus.Errorf("[InitConnection] ping error: %s", err)
 		return err
 	}
+
+	// Add table suffix when creating tables
+	err = database.AutoMigrate(&models.Product{})
+	if err != nil {
+		return err
+	}
+
+	Database = database
 
 	return nil
 }
