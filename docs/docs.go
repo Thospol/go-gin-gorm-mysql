@@ -102,11 +102,6 @@ var doc = `{
                 }
             },
             "post": {
-                "security": [
-                    {
-                        "ApiKeyAuth": []
-                    }
-                ],
                 "description": "Create Product Service API",
                 "consumes": [
                     "application/json"

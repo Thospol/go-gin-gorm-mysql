@@ -1,11 +1,11 @@
 database:
   mysql:
-    host: "localhost"
+    host: "bjdfuyugmtygaodnbvzy-mysql.services.clever-cloud.com"
     port: "3306"
-    username: ""
-    password: ""
-    database_name: ""
-    driver_name: ""
+    username: "ud7odlrnsnhxzgtv"
+    password: "HbkGoovOsDvEUiiIYRBu"
+    database_name: "bjdfuyugmtygaodnbvzy"
+    driver_name: "mysql"
     protocol: "tcp"
     timeout: "5s"
 

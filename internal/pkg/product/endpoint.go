@@ -39,7 +39,6 @@ func NewEndpoint(config *config.Configs, result *config.ReturnResult) Endpoint {
 // @Param request body product.createRequest true "request body"
 // @Success 200 {object} models.Product
 // @Failure 400 {object} config.SwaggerInfoResult
-// @Security ApiKeyAuth
 // @Router /v1/products [post]
 func (ep *endpoint) Create(c *gin.Context) {
 	var request createRequest

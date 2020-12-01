@@ -119,8 +119,6 @@ paths:
           description: Bad Request
           schema:
             $ref: '#/definitions/config.SwaggerInfoResult'
-      security:
-      - ApiKeyAuth: []
       summary: Create Product
       tags:
       - Product
