@@ -51,7 +51,7 @@ func (ep *endpoint) Create(c *gin.Context) {
 		c.Request.Body.Close()
 	}()
 
-	response, err := ep.service.Create(database.Database, request)
+	response, err := ep.service.Create(database.Get(), request)
 	if err != nil {
 		errMsg := config.RR.Internal.ConnectionError
 		if locErr, ok := err.(config.Result); ok {
@@ -75,7 +75,7 @@ func (ep *endpoint) Create(c *gin.Context) {
 // @Failure 400 {object} config.SwaggerInfoResult
 // @Router /v1/products [get]
 func (ep *endpoint) GetAll(c *gin.Context) {
-	response, err := ep.service.GetAll(database.Database)
+	response, err := ep.service.GetAll(database.Get())
 	if err != nil {
 		errMsg := config.RR.Internal.ConnectionError
 		if locErr, ok := err.(config.Result); ok {

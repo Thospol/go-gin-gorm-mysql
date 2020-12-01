@@ -1,6 +1,7 @@
 package database
 
 import (
+	"database/sql"
 	"fmt"
 
 	"go-gin-gorm-mysql/internal/core/config"
@@ -12,12 +13,17 @@ import (
 )
 
 var (
-	// Database global variable database
-	Database = &gorm.DB{}
+	database = &gorm.DB{}
 )
+
+// Get get database
+func Get() *gorm.DB {
+	return database
+}
 
 // InitConnection open initialize a new db connection.
 func InitConnection(cf *config.Configs) error {
+	var err error
 	dns := fmt.Sprintf("%s:%s@%s(%s:%s)/%s?charset=utf8mb4&parseTime=True&loc=Local",
 		cf.Database.MySQL.Username,
 		cf.Database.MySQL.Password,
@@ -27,13 +33,14 @@ func InitConnection(cf *config.Configs) error {
 		cf.Database.MySQL.DatabaseName,
 	)
 
-	database, err := gorm.Open(mysql.Open(dns), &gorm.Config{})
+	database, err = gorm.Open(mysql.Open(dns), &gorm.Config{})
 	if err != nil {
 		logrus.Errorf("[InitConnection] failed to connect to the database error: %s", err)
 		return err
 	}
 
-	sqlDB, err := database.DB()
+	var sqlDB *sql.DB
+	sqlDB, err = database.DB()
 	if err != nil {
 		logrus.Errorf("[InitConnection] set up to connect to the database error: %s", err)
 		return err
@@ -50,8 +57,6 @@ func InitConnection(cf *config.Configs) error {
 	if err != nil {
 		return err
 	}
-
-	Database = database
 
 	return nil
 }
