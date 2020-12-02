@@ -46,18 +46,25 @@ func (r Routes) Init(config *config.Configs, result *config.ReturnResult) http.H
 			Endpoint:    ginSwagger.WrapHandler(swaggerFiles.Handler, ginSwagger.URL("doc.json")),
 		},
 		{
-			Name:        "Create product",
-			Description: "create product description",
+			Name:        "Create",
+			Description: "create product",
 			Method:      http.MethodPost,
 			Pattern:     "products",
 			Endpoint:    productEndpoint.Create,
 		},
 		{
-			Name:        "Get all products",
-			Description: "get all product description",
+			Name:        "Get all",
+			Description: "get all products",
 			Method:      http.MethodGet,
 			Pattern:     "products",
 			Endpoint:    productEndpoint.GetAll,
+		},
+		{
+			Name:        "Get by id",
+			Description: "get product by id",
+			Method:      http.MethodGet,
+			Pattern:     "products/:id",
+			Endpoint:    productEndpoint.GetByID,
 		},
 	}
 

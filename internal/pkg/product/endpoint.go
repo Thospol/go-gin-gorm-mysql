@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"go-gin-gorm-mysql/internal/core/config"
 	"go-gin-gorm-mysql/internal/core/database"
+	"strconv"
 
 	"github.com/gin-gonic/gin"
 )
@@ -12,6 +13,7 @@ import (
 type Endpoint interface {
 	Create(c *gin.Context)
 	GetAll(c *gin.Context)
+	GetByID(c *gin.Context)
 }
 
 type endpoint struct {
@@ -84,6 +86,38 @@ func (ep *endpoint) Create(c *gin.Context) {
 // @Router /v1/products [get]
 func (ep *endpoint) GetAll(c *gin.Context) {
 	response, err := ep.service.GetAll(database.Get())
+	if err != nil {
+		errMsg := config.RR.Internal.ConnectionError
+		if locErr, ok := err.(config.Result); ok {
+			errMsg = locErr
+		}
+		c.AbortWithStatusJSON(errMsg.HTTPStatusCode(), errMsg)
+		return
+	}
+
+	c.JSON(ep.result.Internal.Success.HTTPStatusCode(), response)
+}
+
+// GetByID godoc
+// @Tags Product
+// @Summary Get Product
+// @Description Get Product Service API
+// @Accept json
+// @Produce json
+// @Param Accept-Language header string false "(en, th)"
+// @Param id path int true "query by product_id"
+// @Success 200 {object} models.Product
+// @Failure 400 {object} config.SwaggerInfoResult
+// @Router /v1/products/{id} [get]
+func (ep *endpoint) GetByID(c *gin.Context) {
+	value := c.Param("id")
+	id, err := strconv.ParseUint(value, 10, 64)
+	if err != nil {
+		c.AbortWithStatusJSON(ep.result.InvalidRequest.HTTPStatusCode(), ep.result.InvalidRequest.WithLocale(c))
+		return
+	}
+
+	response, err := ep.service.GetByID(database.Get(), uint(id))
 	if err != nil {
 		errMsg := config.RR.Internal.ConnectionError
 		if locErr, ok := err.(config.Result); ok {

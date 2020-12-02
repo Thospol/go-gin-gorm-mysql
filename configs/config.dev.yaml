@@ -9,6 +9,14 @@ database:
     protocol: "tcp"
     timeout: "5s"
 
+swagger:
+  title: "Workkami API Docs"
+  description: "Workkami is application to project management."
+  version: "v1"
+  host: "localhost:8080"
+  base_path: "/api"
+  schemes: ['http']
+
 http_server:
   read_timeout: 10s
   write_timeout: 10s

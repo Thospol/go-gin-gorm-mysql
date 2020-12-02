@@ -1,14 +1,9 @@
 {
     "swagger": "2.0",
     "info": {
-        "description": "Learning API Description",
-        "title": "Learning API",
         "contact": {},
-        "license": {},
-        "version": "1.0"
+        "license": {}
     },
-    "host": "localhost:8080",
-    "basePath": "/api",
     "paths": {
         "/v1/healthcheck": {
             "get": {
@@ -130,6 +125,50 @@
                     }
                 }
             }
+        },
+        "/v1/products/{id}": {
+            "get": {
+                "description": "Get Product Service API",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Product"
+                ],
+                "summary": "Get Product",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "(en, th)",
+                        "name": "Accept-Language",
+                        "in": "header"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "query by product_id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.Product"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/config.SwaggerInfoResult"
+                        }
+                    }
+                }
+            }
         }
     },
     "definitions": {
@@ -172,6 +211,11 @@
         },
         "product.createRequest": {
             "type": "object",
+            "required": [
+                "amount",
+                "name",
+                "price"
+            ],
             "properties": {
                 "amount": {
                     "type": "integer"

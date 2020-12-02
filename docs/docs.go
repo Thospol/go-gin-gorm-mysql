@@ -145,6 +145,50 @@ var doc = `{
                     }
                 }
             }
+        },
+        "/v1/products/{id}": {
+            "get": {
+                "description": "Get Product Service API",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Product"
+                ],
+                "summary": "Get Product",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "(en, th)",
+                        "name": "Accept-Language",
+                        "in": "header"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "query by product_id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.Product"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/config.SwaggerInfoResult"
+                        }
+                    }
+                }
+            }
         }
     },
     "definitions": {
@@ -187,6 +231,11 @@ var doc = `{
         },
         "product.createRequest": {
             "type": "object",
+            "required": [
+                "amount",
+                "name",
+                "price"
+            ],
             "properties": {
                 "amount": {
                     "type": "integer"
@@ -216,12 +265,12 @@ type swaggerInfo struct {
 
 // SwaggerInfo holds exported Swagger Info so clients can modify it
 var SwaggerInfo = swaggerInfo{
-	Version:     "1.0",
-	Host:        "localhost:8080",
-	BasePath:    "/api",
+	Version:     "",
+	Host:        "",
+	BasePath:    "",
 	Schemes:     []string{},
-	Title:       "Learning API",
-	Description: "Learning API Description",
+	Title:       "",
+	Description: "",
 }
 
 type s struct{}

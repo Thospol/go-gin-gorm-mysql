@@ -12,6 +12,7 @@ import (
 type Service interface {
 	Create(database *gorm.DB, request createRequest) (*models.Product, error)
 	GetAll(database *gorm.DB) ([]*models.Product, error)
+	GetByID(database *gorm.DB, id uint) (*models.Product, error)
 }
 
 type service struct {
@@ -53,4 +54,15 @@ func (s *service) GetAll(database *gorm.DB) ([]*models.Product, error) {
 	}
 
 	return entities, nil
+}
+
+// GetByID get product by id service
+func (s *service) GetByID(database *gorm.DB, id uint) (*models.Product, error) {
+	product := &models.Product{}
+	err := s.productRepository.FindByID(database, id, product)
+	if err != nil {
+		return nil, s.result.Internal.DatabaseNotFound
+	}
+
+	return product, nil
 }

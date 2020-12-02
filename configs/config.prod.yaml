@@ -9,6 +9,14 @@ database:
     protocol: "tcp"
     timeout: "5s"
 
+swagger:
+  title: "Workkami API Docs"
+  description: "Workkami is application to project management."
+  version: "1.0"
+  host: "go-mysql-api-xapa2c3k2q-as.a.run.app"
+  base_path: "/api"
+  schemes: ['https']
+
 http_server:
   read_timeout: 10s
   write_timeout: 10s

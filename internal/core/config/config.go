@@ -27,13 +27,8 @@ const (
 
 // Configs models
 type Configs struct {
-	Validator  *validator.Validate
-	HTTPServer struct {
-		ReadTimeout       time.Duration `mapstructure:"read_timeout"`
-		WriteTimeout      time.Duration `mapstructure:"write_timeout"`
-		ReadHeaderTimeout time.Duration `mapstructure:"read_header_timeout"`
-	} `mapstructure:"http_server"`
-	Database struct {
+	Validator *validator.Validate
+	Database  struct {
 		MySQL struct {
 			Host         string `mapstructure:"host"`
 			Port         string `mapstructure:"port"`
@@ -45,6 +40,19 @@ type Configs struct {
 			Timeout      string `mapstructure:"timeout"`
 		} `mapstructure:"mysql"`
 	} `mapstructure:"database"`
+	Swagger struct {
+		Title       string   `mapstructure:"title"`
+		Description string   `mapstructure:"description"`
+		Version     string   `mapstructure:"version"`
+		Host        string   `mapstructure:"host"`
+		BasePath    string   `mapstructure:"base_path"`
+		Schemes     []string `mapstructure:"schemes"`
+	} `mapstructure:"swagger"`
+	HTTPServer struct {
+		ReadTimeout       time.Duration `mapstructure:"read_timeout"`
+		WriteTimeout      time.Duration `mapstructure:"write_timeout"`
+		ReadHeaderTimeout time.Duration `mapstructure:"read_header_timeout"`
+	} `mapstructure:"http_server"`
 }
 
 // InitConfig init config
