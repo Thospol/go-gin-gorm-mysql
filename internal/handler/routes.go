@@ -66,6 +66,20 @@ func (r Routes) Init(config *config.Configs, result *config.ReturnResult) http.H
 			Pattern:     "products/:id",
 			Endpoint:    productEndpoint.GetByID,
 		},
+		{
+			Name:        "Update",
+			Description: "update product by id",
+			Method:      http.MethodPatch,
+			Pattern:     "products/:id",
+			Endpoint:    productEndpoint.Update,
+		},
+		{
+			Name:        "Delete",
+			Description: "delete product by id",
+			Method:      http.MethodDelete,
+			Pattern:     "products/:id",
+			Endpoint:    productEndpoint.Delete,
+		},
 	}
 
 	route := gin.New()

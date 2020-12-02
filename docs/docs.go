@@ -188,6 +188,99 @@ var doc = `{
                         }
                     }
                 }
+            },
+            "delete": {
+                "description": "Delete Product Service API",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Product"
+                ],
+                "summary": "Delete Product",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "(en, th)",
+                        "name": "Accept-Language",
+                        "in": "header"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "query by product_id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/config.SwaggerInfoResult"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/config.SwaggerInfoResult"
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "description": "Update Product Service API",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Product"
+                ],
+                "summary": "Update Product",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "(en, th)",
+                        "name": "Accept-Language",
+                        "in": "header"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "query by product_id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "request body",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/product.createRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.Product"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/config.SwaggerInfoResult"
+                        }
+                    }
+                }
             }
         }
     },

@@ -9,6 +9,8 @@ import (
 // Product product repository
 type Product interface {
 	Create(database *gorm.DB, i interface{}) error
+	Update(database *gorm.DB, i interface{}) error
+	Delete(database *gorm.DB, i interface{}) error
 	FindByID(database *gorm.DB, id uint, i interface{}) error
 	FindByName(database *gorm.DB, name string) ([]*models.Product, error)
 	FindAll(database *gorm.DB) ([]*models.Product, error)

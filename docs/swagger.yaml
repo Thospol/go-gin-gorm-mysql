@@ -122,6 +122,34 @@ paths:
       tags:
       - Product
   /v1/products/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete Product Service API
+      parameters:
+      - description: (en, th)
+        in: header
+        name: Accept-Language
+        type: string
+      - description: query by product_id
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/config.SwaggerInfoResult'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/config.SwaggerInfoResult'
+      summary: Delete Product
+      tags:
+      - Product
     get:
       consumes:
       - application/json
@@ -148,6 +176,40 @@ paths:
           schema:
             $ref: '#/definitions/config.SwaggerInfoResult'
       summary: Get Product
+      tags:
+      - Product
+    patch:
+      consumes:
+      - application/json
+      description: Update Product Service API
+      parameters:
+      - description: (en, th)
+        in: header
+        name: Accept-Language
+        type: string
+      - description: query by product_id
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: request body
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/product.createRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Product'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/config.SwaggerInfoResult'
+      summary: Update Product
       tags:
       - Product
 swagger: "2.0"
