@@ -10,8 +10,8 @@ database:
     timeout: "5s"
 
 swagger:
-  title: "Workkami API Docs"
-  description: "Workkami is application to project management."
+  title: "Learning API Docs"
+  description: "Learning is application to learning golang."
   version: "1.0"
   host: "go-mysql-api-xapa2c3k2q-as.a.run.app"
   base_path: "/api"

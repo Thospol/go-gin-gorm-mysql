@@ -10,8 +10,8 @@ database:
     timeout: "5s"
 
 swagger:
-  title: "Workkami API Docs"
-  description: "Workkami is application to project management."
+  title: "Learning API Docs"
+  description: "Learning is application to learning golang."
   version: "v1"
   host: "localhost:8080"
   base_path: "/api"
